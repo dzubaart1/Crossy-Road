@@ -5,6 +5,8 @@ using UnityEngine;
 public class TerrainGenerator : MonoBehaviour
 {
     [SerializeField]
+    private Transform terrainHolder;
+    [SerializeField]
     private List<TerrainObject> terrainDatas = new List<TerrainObject>();
     [SerializeField]
     private int maxTerrains;
@@ -16,14 +18,6 @@ public class TerrainGenerator : MonoBehaviour
     private void Start()
     {
         BuildStartPlane();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            UpdateTerrains();
-        }
     }
 
     private void BuildStartPlane()
@@ -39,20 +33,18 @@ public class TerrainGenerator : MonoBehaviour
         int countsOfTerrain = Random.Range(1, terrainDatas[whichTerrain].maxInSuccession);
         for(int i = 0; i < countsOfTerrain; i++)
         {
-            var gameObject = Instantiate(terrainDatas[whichTerrain].terrain, currentPosition, Quaternion.identity);
+            var gameObject = Instantiate(terrainDatas[whichTerrain].terrain, currentPosition, Quaternion.identity, terrainHolder);
             currentTerrains.Add(gameObject);
             currentPosition.x++;
-            if(currentTerrains.Count > maxTerrains)
-            {
-                Destroy(currentTerrains[0]);
-                currentTerrains.RemoveAt(0);
-            }
         }
     }
 
-    private void UpdateTerrains()
+    public void UpdateTerrains(Vector3 playerPos)
     {
-        BuildTerrain();
+        if (currentPosition.x - playerPos.x < minDistanceCreating)
+        {
+            BuildTerrain();
+        }
         if (currentTerrains.Count > maxTerrains)
         {
             Destroy(currentTerrains[0]);
