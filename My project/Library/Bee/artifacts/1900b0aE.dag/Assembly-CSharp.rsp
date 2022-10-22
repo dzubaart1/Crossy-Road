@@ -358,10 +358,14 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/Scripts/CameraMovement.cs"
-"Assets/Scripts/Player.cs"
+"Assets/Scripts/GameOver.cs"
+"Assets/Scripts/MovemventCamera.cs"
+"Assets/Scripts/PlayerCntrl.cs"
 "Assets/Scripts/TerrainGenerator.cs"
 "Assets/Scripts/TerrainObject.cs"
+"Assets/Scripts/TreeSpawner.cs"
+"Assets/Scripts/VehicleCntrl.cs"
+"Assets/Scripts/VehicleSpawner.cs"
 -langversion:9.0
 
 /deterministic

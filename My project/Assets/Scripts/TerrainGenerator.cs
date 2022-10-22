@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
@@ -24,12 +25,16 @@ public class TerrainGenerator : MonoBehaviour
     {
         for(int i = 0; i < minDistanceCreating; i++)
         {
-            BuildTerrain();
+            BuildTerrain(3);
         }
     }
-    private void BuildTerrain()
+    private void BuildTerrain(int whichTerrain = -1)
     {
-        int whichTerrain = Random.Range(0, terrainDatas.Count);
+        if (whichTerrain == -1)
+        {
+            whichTerrain = Random.Range(0, terrainDatas.Count);
+        }
+
         int countsOfTerrain = Random.Range(1, terrainDatas[whichTerrain].maxInSuccession);
         for(int i = 0; i < countsOfTerrain; i++)
         {
