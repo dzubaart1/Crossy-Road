@@ -121,6 +121,11 @@
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Lib/Zenject.ReflectionBaking.Mono.Cecil.dll"
+-r:"Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Lib/Zenject.ReflectionBaking.Mono.Cecil.Mdb.dll"
+-r:"Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Lib/Zenject.ReflectionBaking.Mono.Cecil.Pdb.dll"
+-r:"Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Lib/Zenject.ReflectionBaking.Mono.Cecil.Rocks.dll"
+-r:"Assets/Plugins/Zenject/Source/Usage/Zenject-usage.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/Managed/UnityEngine/UnityEditor.DiagnosticsModule.dll"
@@ -358,14 +363,19 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Zenject-Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Zenject-PoolMonitor-Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Zenject-ReflectionBaking-Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Zenject.ref.dll"
+"Assets/Scripts/Cntrls/PlayerCntrl.cs"
+"Assets/Scripts/Cntrls/VehicleCntrl.cs"
 "Assets/Scripts/GameOver.cs"
+"Assets/Scripts/Installers/MainSceneInstaller.cs"
 "Assets/Scripts/MovemventCamera.cs"
-"Assets/Scripts/PlayerCntrl.cs"
+"Assets/Scripts/Spawners/TreeSpawner.cs"
+"Assets/Scripts/Spawners/VehicleSpawner.cs"
 "Assets/Scripts/TerrainGenerator.cs"
 "Assets/Scripts/TerrainObject.cs"
-"Assets/Scripts/TreeSpawner.cs"
-"Assets/Scripts/VehicleCntrl.cs"
-"Assets/Scripts/VehicleSpawner.cs"
 -langversion:9.0
 
 /deterministic
