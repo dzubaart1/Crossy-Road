@@ -1,21 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public class TerrainGenerator : MonoBehaviour
 {
     [SerializeField]
-    private Transform terrainHolder;
+    private Transform _terrainHolder;
     [SerializeField]
-    private List<TerrainObject> terrainDatas = new List<TerrainObject>();
+    private int _maxTerrains;
     [SerializeField]
-    private int maxTerrains;
-    [SerializeField]
-    private int minDistanceCreating;
+    private int _minDistanceCreating;
 
-    private List<GameObject> currentTerrains = new List<GameObject>();
-    private Vector3 currentPosition = new Vector3(0,0,0);
+    private List<GameObject> _currentTerrains;
+    private List<GameObject> _commonRoads;
+    private List<GameObject> _startRoads;
+    private Vector3 _currentPosition;
+    private RoadsCollection _roadsCollection;
+
+    [Inject]
+    public void Construct(RoadsCollection roadsCollection)
+    {
+        _roadsCollection = roadsCollection;
+    }
+    private void Awake()
+    {
+        _currentTerrains = new List<GameObject>();
+        _currentPosition = new Vector3(0, 0, 0);
+        _roadsCollection.CollectRoads();
+        _commonRoads = _roadsCollection.commonRoads;
+        _startRoads = _roadsCollection.startRoads;
+    }
+
     private void Start()
     {
         BuildStartPlane();
@@ -23,37 +41,29 @@ public class TerrainGenerator : MonoBehaviour
 
     private void BuildStartPlane()
     {
-        for(int i = 0; i < minDistanceCreating; i++)
+        BuildTerrain(_startRoads.Find(n => n.name == "Start"));
+        for(int i = 0; i < _minDistanceCreating; i++)
         {
-            BuildTerrain(3);
+            BuildTerrain(_startRoads.Find(n => n.name == "Crazy"));
         }
     }
-    private void BuildTerrain(int whichTerrain = -1)
+    private void BuildTerrain(GameObject terrain)
     {
-        if (whichTerrain == -1)
-        {
-            whichTerrain = Random.Range(0, terrainDatas.Count);
-        }
-
-        int countsOfTerrain = Random.Range(1, terrainDatas[whichTerrain].maxInSuccession);
-        for(int i = 0; i < countsOfTerrain; i++)
-        {
-            var gameObject = Instantiate(terrainDatas[whichTerrain].terrain, currentPosition, Quaternion.identity, terrainHolder);
-            currentTerrains.Add(gameObject);
-            currentPosition.x++;
-        }
+        var gameObject = Instantiate(terrain, _currentPosition, Quaternion.identity, _terrainHolder);
+        _currentTerrains.Add(gameObject);
+        _currentPosition.x++;
     }
 
     public void UpdateTerrains(Vector3 playerPos)
     {
-        if (currentPosition.x - playerPos.x < minDistanceCreating)
+        if (_currentPosition.x - playerPos.x < _minDistanceCreating)
         {
-            BuildTerrain();
+            BuildTerrain(_commonRoads[Random.Range(0,_commonRoads.Count)]);
         }
-        if (currentTerrains.Count > maxTerrains)
+        if (_currentTerrains.Count > _maxTerrains)
         {
-            Destroy(currentTerrains[0]);
-            currentTerrains.RemoveAt(0);
+            Destroy(_currentTerrains[0]);
+            _currentTerrains.RemoveAt(0);
         }
     }
 }

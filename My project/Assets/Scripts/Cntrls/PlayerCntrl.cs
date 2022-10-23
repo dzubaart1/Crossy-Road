@@ -6,13 +6,14 @@ namespace Cntrls
     public class PlayerCntrl : MonoBehaviour
     {
         private TerrainGenerator _terrainGen;
-
         private Animator _animator;
+        private Border _border;
 
         [Inject]
-        private void Construct(TerrainGenerator terrainGenerator)
+        private void Construct(TerrainGenerator terrainGenerator, Border border)
         {
             _terrainGen = terrainGenerator;
+            _border = border;
         }
 
         private void Awake()
@@ -21,30 +22,29 @@ namespace Cntrls
         }
         private void Update()
         {
+            Vector3 res = new Vector3();
             if (Input.GetKeyDown(KeyCode.W))
-            {
-                Vector3 v = new Vector3(1, 0, 0);
-                if (CheckInfo(transform.right))
-                    MoveToVector(v);
-            }
+                res = Vector3.right;
             else if (Input.GetKeyDown(KeyCode.A))
-            {
-                Vector3 v = new Vector3(0, 0, 1);
-                if (CheckInfo(transform.forward))
-                    MoveToVector(v);
-            }
+                res = Vector3.forward;
             else if (Input.GetKeyDown(KeyCode.D))
-            {
-                Vector3 v = new Vector3(0, 0, -1);
-                if (CheckInfo(-transform.forward))
-                    MoveToVector(v);
-            }
+                res = Vector3.back;
             else if (Input.GetKeyDown(KeyCode.S))
+                res = Vector3.left;
+
+            if (CheckInfo(res) && res != Vector3.zero)
             {
-                Vector3 v = new Vector3(-1, 0, 0);
-                if (CheckInfo(-transform.right))
-                    MoveToVector(v);
+                MoveToVector(res);
+                _terrainGen.UpdateTerrains(transform.position);
             }
+            
+
+            if (transform.position.z > _border._upperBound || transform.position.z < _border._lowerBound || transform.position.y < 0)
+            {
+                new GameOver();
+            }
+
+            res = Vector3.zero;
         }
 
         private bool CheckInfo(Vector3 checkPos)
@@ -67,7 +67,6 @@ namespace Cntrls
                 Mathf.Round(transform.position.y),
                 Mathf.Round(transform.position.z)
             );
-            _terrainGen.UpdateTerrains(transform.position);
         }
         private void OnCollisionEnter(Collision collision)
         {

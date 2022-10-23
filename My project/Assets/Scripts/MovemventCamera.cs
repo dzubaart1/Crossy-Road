@@ -1,13 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cntrls;
 using UnityEngine;
+using Zenject;
 
 public class MovemventCamera : MonoBehaviour
 {
-    public Transform cameraTarget;
-    public float minimumAngle;
-    public float maximumAngle;
-    public float mouseSensitivity;
+    private Transform cameraTarget;
+    private float minimumAngle = 70f;
+    private float maximumAngle = 310f;
+    private float mouseSensitivity = 3f;
+
+    [Inject]
+    private void Construct(PlayerCntrl playerCntrl)
+    {
+        cameraTarget = playerCntrl.transform.Find("CameraTarget");
+        
+    }
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;

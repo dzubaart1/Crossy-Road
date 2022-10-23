@@ -367,15 +367,17 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Zenject-PoolMonitor-Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Zenject-ReflectionBaking-Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Zenject.ref.dll"
+"Assets/Scripts/Border.cs"
 "Assets/Scripts/Cntrls/PlayerCntrl.cs"
 "Assets/Scripts/Cntrls/VehicleCntrl.cs"
 "Assets/Scripts/GameOver.cs"
 "Assets/Scripts/Installers/MainSceneInstaller.cs"
 "Assets/Scripts/MovemventCamera.cs"
+"Assets/Scripts/RoadsCollection.cs"
+"Assets/Scripts/ScriptableObjects/CollectionParams.cs"
 "Assets/Scripts/Spawners/TreeSpawner.cs"
 "Assets/Scripts/Spawners/VehicleSpawner.cs"
 "Assets/Scripts/TerrainGenerator.cs"
-"Assets/Scripts/TerrainObject.cs"
 -langversion:9.0
 
 /deterministic
